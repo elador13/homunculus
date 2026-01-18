@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Don't commit user state (that's per-project)
+# state.json files are created in each project's .claude/homunculus/
+.claude/homunculus/
+
+# Landing page
+landing/node_modules/
+
+# Temp image generation outputs
+cover*.jpg
+dore*.jpg
+glitch*.jpg
+fig*.png
+!cover.png

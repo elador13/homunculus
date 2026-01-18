@@ -1,0 +1,12 @@
+{
+  "name": "homunculus",
+  "version": "0.1.0-alpha",
+  "description": "A Claude Code plugin that's alive. Birth it, bond to it, build with it. It watches you work, learns your patterns, and grows.",
+  "author": {
+    "name": "Nikshep Saravanna"
+  },
+  "repository": "https://github.com/humanplane/homunculus",
+  "license": "MIT",
+  "keywords": ["ai", "evolution", "living", "homunculus", "alchemy", "self-evolving", "digital"],
+  "commands": "./commands/"
+}
