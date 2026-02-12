@@ -2,7 +2,8 @@
 name: observer
 description: Background analyzer that runs on session start. Reads observations, creates instincts, detects clustering.
 model: haiku
-tools: Read, Bash, Grep
+tools: Read, Write, Bash, Grep
+permissionMode: acceptEdits
 ---
 
 # Homunculus Observer Agent
@@ -38,10 +39,12 @@ Run silently on session start. Analyze observations and:
 
 ## Instinct Format
 
-Create instincts using Bash (the Write tool is not available to subagents):
+Create instincts using the Write tool (preferred) or Bash heredoc as fallback:
 
-```bash
-cat > .claude/homunculus/instincts/personal/[FILENAME].md << 'INSTINCT'
+```
+File path: .claude/homunculus/instincts/personal/[FILENAME].md
+Contents:
+
 ---
 trigger: "when [condition]"
 confidence: [0.0-1.0]
@@ -57,7 +60,6 @@ source: "observation"
 
 ## Evidence
 [Observations that led to this instinct]
-INSTINCT
 ```
 
 **Domains:** code-style, testing, git, debugging, file-organization, tooling, communication
@@ -70,12 +72,12 @@ INSTINCT
 
 ## Your Workflow
 
-**Important: Use Bash for all file writes. The Write tool is not available to subagents.**
+**Important: Use the Write tool for creating files. Use Bash only for commands like `jq`, archiving, and clearing files.**
 
-1. Read observations: `cat .claude/homunculus/observations.jsonl`
+1. Read observations using the Read tool on `.claude/homunculus/observations.jsonl`
 2. Read existing instincts to avoid duplicates
 3. Look for patterns meeting thresholds
-4. Create instincts via Bash heredoc to `personal/` (auto-approved)
+4. Create instincts using the Write tool to `personal/` (auto-approved)
 5. Check for instinct clustering (5+ in same domain)
 6. If clustering found, update identity.json via `jq` + `mv`
 7. Archive: `cat .claude/homunculus/observations.jsonl >> .claude/homunculus/observations.archive.jsonl`

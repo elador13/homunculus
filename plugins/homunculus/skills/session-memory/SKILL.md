@@ -21,10 +21,11 @@ fi
 ```
 
 If you see "SPAWN_OBSERVER", use the Task tool to spawn the observer agent in background:
-- subagent_type: "general-purpose"
-- model: "haiku"
+- subagent_type: "homunculus:observer"
 - run_in_background: true
-- prompt: Read the observer agent instructions from plugins/homunculus/agents/observer.md and execute them.
+- prompt: "Process observations and create instincts. The project root is {current_working_directory} — resolve all .claude/homunculus/ paths relative to the project root."
+
+Note: The observer agent is registered as a plugin agent. Claude Code loads its instructions, tools, model, and permissions automatically from the agent definition. Do not use "general-purpose" as the subagent type — use "homunculus:observer" so the agent's configuration is enforced.
 
 ### 2. Load Context
 
